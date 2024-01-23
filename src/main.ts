@@ -1,10 +1,10 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import * as dotenv from 'dotenv';
-import { AppConstants } from './constants';
-import { json, urlencoded } from 'express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as dotenv from 'dotenv';
+import { json, urlencoded } from 'express';
+import { AppModule } from './app.module';
+import { AppConstants } from './common/constants';
 
 dotenv.config();
 if (AppConstants.isDev === 'true') {

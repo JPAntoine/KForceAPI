@@ -1,10 +1,26 @@
+import { AzureCosmosDbModule } from '@nestjs/azure-database';
 import { Module } from '@nestjs/common';
-import { DocsController } from './controllers/docs.controller';
-import { DocsService } from './services/docs/docs.service';
+import { ConfigModule } from '@nestjs/config';
+import { CandidatesModule } from './candidates/candidates.module';
+import { CompaniesModule } from './companies/companies.module';
+import { JobsModule } from './jobs/jobs.module';
 
 @Module({
-  imports: [],
-  controllers: [DocsController],
-  providers: [DocsService],
+  imports: [
+    JobsModule,
+    CandidatesModule,
+    CompaniesModule,
+    ConfigModule.forRoot(),
+    AzureCosmosDbModule.forRootAsync({
+      useFactory: async () => ({
+        dbName: 'KForce',
+        endpoint: process.env.COSMOS_URI,
+        key: process.env.COSMOS_KEY,
+      }),
+      imports: undefined,
+    }),
+  ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
