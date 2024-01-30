@@ -31,11 +31,12 @@ export class JobsService {
 
   async getJobsByMatch(search: string): Promise<Array<IJobDto>> {
     const querySpec: SqlQuerySpec = {
-      query: 'SELECT * FROM c WHERE LOWER(c.Title) like LOWER(@value)',
+      query:
+        'SELECT * FROM c WHERE CONTAINS(LOWER(c.Title), LOWER(@value)) OR CONTAINS(LOWER(c.Description), LOWER(@value))',
       parameters: [
         {
           name: '@value',
-          value: `%${search}%`,
+          value: `${search}`,
         },
       ],
     };

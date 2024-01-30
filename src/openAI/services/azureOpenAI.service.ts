@@ -29,7 +29,7 @@ export class AzureOpenAIService {
               headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${process.env.AI_KEY}`,
-                'azureml-model-deployment': 'kforce-demo-v2-1-10-2024-3',
+                'azureml-model-deployment': 'kforce-demo-v2-1-10-2024-5',
               },
             })
             .pipe(
